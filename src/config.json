@@ -1,0 +1,30 @@
+{
+    "scanInterval": 5,
+    "sensitiveDirectories": [
+        "%USERPROFILE%\\Documents",
+        "%USERPROFILE%\\Desktop",
+        "%APPDATA%",
+        "%LOCALAPPDATA%"
+    ],
+    "suspiciousExtensions": [
+        ".txt",
+        ".log",
+        ".dat",
+        ".vbs",
+        ".exe",
+        ".bat",
+        ".ps1"
+    ],
+    "excludeProcesses": [
+        "svchost",
+        "System",
+        "Idle",
+        "RuntimeBroker",
+        "explorer"
+    ],
+    "logRetentionDays": 30,
+    "alertThresholds": {
+        "highSeverityCount": 1,
+        "mediumSeverityCount": 5
+    }
+} 

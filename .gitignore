@@ -1,0 +1,45 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+out/
+artifacts/
+
+# Visual Studio and VS Code
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.VC.db
+*.VC.VC.opendb
+.vscode/
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+
+# Logs and runtime output
+*.log
+src/logs/
+src/findings/
+
+# PowerShell
+*.psd1.bak
+*.psm1.bak
+
+# OS files
+Thumbs.db
+Desktop.ini
+
+# Generated publish/package output
+publish/
+*.Publish.xml
+
+# Local secrets / overrides
+*.local.json
+*.secrets.json

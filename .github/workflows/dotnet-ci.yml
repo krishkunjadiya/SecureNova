@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Setup .NET 6
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Restore
+        run: dotnet restore SecureNova.sln
+
+      - name: Build (Release)
+        run: dotnet build SecureNova.sln --configuration Release --no-restore
+
+      - name: Validate PowerShell script syntax
+        shell: pwsh
+        run: |
+          $allErrors = @()
+          Get-ChildItem -Path src -Filter *.ps1 -Recurse | ForEach-Object {
+            $tokens = $null
+            $parseErrors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile($_.FullName, [ref]$tokens, [ref]$parseErrors) | Out-Null
+            if ($parseErrors -and $parseErrors.Count -gt 0) {
+              foreach ($err in $parseErrors) {
+                $allErrors += "$($_.FullName):$($err.Extent.StartLineNumber): $($err.Message)"
+              }
+            }
+          }
+
+          if ($allErrors.Count -gt 0) {
+            $allErrors | ForEach-Object { Write-Error $_ }
+            throw "PowerShell syntax validation failed."
+          }
