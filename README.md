@@ -2,7 +2,7 @@
 
 SecureNova is a Windows-focused security monitoring stack that combines a PowerShell detection engine with .NET desktop and service components.
 
-This repository is organized for local operations and GitHub-based collaboration, with CI, issue templates, security policy, and contribution guidelines included.
+This repository is organized for local operations and GitHub-based collaboration, with CI and issue templates included.
 
 ## What It Includes
 
@@ -73,11 +73,11 @@ These paths are ignored by Git through `.gitignore`.
 
 ## Security Reporting
 
-Please report vulnerabilities privately as described in `SECURITY.md`.
+Please report vulnerabilities privately through your repository security contact channel.
 
 ## Contributing
 
-See `CONTRIBUTING.md` for workflow and pull request expectations.
+Please open an issue first to discuss major changes before submitting a pull request.
 
 ## License
 

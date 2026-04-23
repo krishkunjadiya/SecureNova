@@ -43,3 +43,7 @@ publish/
 # Local secrets / overrides
 *.local.json
 *.secrets.json
+
+# Markdown policy: keep only the root README in git
+*.md
+!/README.md
