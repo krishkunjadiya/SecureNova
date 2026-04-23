@@ -4,15 +4,14 @@ using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.IO;
 using System.Threading.Tasks;
-using System.Configuration;
 using System.Diagnostics;
 
 namespace SecureNova.Service
 {
     public class SecureNovaService : ServiceBase
     {
-        private Runspace _runspace;
-        private PowerShell _powershell;
+        private Runspace? _runspace;
+        private PowerShell? _powershell;
         private bool _isRunning;
         private readonly string _scriptPath;
         private readonly EventLog _eventLog;
@@ -71,6 +70,12 @@ namespace SecureNova.Service
         private void StartMonitoring()
         {
             if (_isRunning) return;
+            if (_powershell is null)
+            {
+                _eventLog.WriteEntry("PowerShell engine is not initialized.", EventLogEntryType.Error);
+                return;
+            }
+
             _isRunning = true;
 
             Task.Run(() =>
@@ -95,10 +100,12 @@ namespace SecureNova.Service
             if (!_isRunning) return;
             _isRunning = false;
 
-            _powershell.Stop();
-            _powershell.Commands.Clear();
-            _powershell.Dispose();
-            _runspace.Dispose();
+            _powershell?.Stop();
+            _powershell?.Commands.Clear();
+            _powershell?.Dispose();
+            _runspace?.Dispose();
+            _powershell = null;
+            _runspace = null;
         }
 
         private void ProcessResults(System.Collections.ObjectModel.Collection<PSObject> results)
