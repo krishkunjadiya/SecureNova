@@ -35,6 +35,50 @@
 - [ ] Enable auto-delete for merged branches
 - [ ] Configure default squash-merge strategy (optional)
 
+## Exact Branch Protection Setup (main)
+
+Use GitHub web UI:
+
+1. Open repository Settings.
+2. Open Rules, then Rulesets.
+3. Click New ruleset and choose New branch ruleset.
+4. Name: `Protect main`.
+5. Enforcement status: `Active`.
+6. Target branches:
+	- Add target by pattern: `main`
+
+Enable these rules:
+
+- [ ] Restrict deletions
+- [ ] Restrict force pushes
+- [ ] Require a pull request before merging
+- [ ] Require approvals: set to `1` minimum
+- [ ] Dismiss stale pull request approvals when new commits are pushed
+- [ ] Require approval of the most recent reviewable push
+- [ ] Require status checks to pass before merging
+- [ ] Require branches to be up to date before merging
+- [ ] Status checks: add the CI job check shown by this repo workflow (`build` from workflow `CI`)
+- [ ] Require conversation resolution before merging
+- [ ] Block merge queue bypass (if merge queue is enabled)
+
+Optional hardening:
+
+- [ ] Require signed commits
+- [ ] Require linear history
+- [ ] Require deployments to succeed before merging (if you add environments later)
+
+Admin and bypass recommendations:
+
+- [ ] Do not add bypass actors initially
+- [ ] Apply rules to administrators
+
+Validation after saving ruleset:
+
+- [ ] Open a test branch and create a pull request into `main`
+- [ ] Confirm direct push to `main` is blocked
+- [ ] Confirm merge is blocked until CI check `build` passes
+- [ ] Confirm at least one approval is required
+
 ## First Publish Commands
 
 Run from repository root after creating an empty GitHub repository:
