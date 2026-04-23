@@ -18,13 +18,12 @@ This repository is organized for local operations and GitHub-based collaboration
 - `src/SecureNova.ps1` - Core scanning engine script
 - `src/config.json` - Runtime scanner configuration
 - `src/SecureNova.GUI` - WPF desktop application (`net8.0-windows`)
-- `src/SecureNova.Service` - Service host (`net6.0-windows`)
+- `src/SecureNova.Service` - Service host (`net8.0-windows`)
 
 ## Prerequisites
 
 - Windows 10 or Windows 11
 - .NET SDK 8.0 (for GUI project)
-- .NET SDK 6.0 (for Service project)
 - PowerShell 5.1 or later
 - Administrator privileges (required for full scan visibility)
 
